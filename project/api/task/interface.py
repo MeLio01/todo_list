@@ -61,7 +61,7 @@ class Task:
         return None
     
     @classmethod
-    def get_tasks_by_completed(cls, taskinfo: Dict[str, Any]):
+    def get_completed_tasks(cls, taskinfo: Dict[str, Any]):
         tasks = TaskDB.get_all({"completed": taskinfo["completed"]})
         if tasks:
             return [cls.instance_creator(task) for task in tasks]

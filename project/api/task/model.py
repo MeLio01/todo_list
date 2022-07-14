@@ -8,5 +8,5 @@ class Task(ResourceMixin, db.Model):
 
     id = db.Column(db.String(120), unique=True, primary_key=True, index=True, nullable=False, default=generate_uuid)
     content = db.Column(db.String(200), nullable=False)
-    completed = db.Column(db.Integer, default=0)
+    completed = db.Column(db.Boolean, default=0)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
