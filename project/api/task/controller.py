@@ -2,7 +2,7 @@ import os
 from flask import Blueprint, request
 from .interface import Task
 from .service import delete_task_service
-from .schema import task_schema, task_out_schema, task_id_schema, task_date_schema
+from .schema import task_schema, task_out_schema, task_id_schema
 from project.lib.errors import BadRequest
 
 # Initialize the blueprint for task related routes
@@ -69,16 +69,6 @@ def get_all_tasks():
         raise BadRequest("Task not found", 400)
     return {"tasks": tasks}, 200
 
-def get_tasks_by_date_created():
-    auth = request.headers.get("Authorization")
-    if auth != os.environ.get("AUTH_PASSWORD"):
-        raise BadRequest("Authorization invalid", 400)
-    data = task_date_schema.load(request.json)
-    tasks = Task.get_tasks_by_date_created(data)
-    if tasks == None:
-        raise BadRequest("Task not found", 400)
-    return {"tasks": tasks}, 200
-
 def get_completed_tasks():
     auth = request.headers.get("Authorization")
     if auth != os.environ.get("AUTH_PASSWORD"):
@@ -95,5 +85,4 @@ task_blueprint.add_url_rule("task/update", view_func=update_task, methods=["POST
 task_blueprint.add_url_rule("task/update_status", view_func=update_task_status, methods=["POST", "PUT"])
 task_blueprint.add_url_rule("task/delete", view_func=delete_task, methods=["DELETE"])
 task_blueprint.add_url_rule("task/get_all_tasks", view_func=get_all_tasks, methods=["GET"])
-task_blueprint.add_url_rule("task/get_tasks_by_date_created", view_func=get_tasks_by_date_created, methods=["GET"])
 task_blueprint.add_url_rule("task/get_completed_tasks", view_func=get_completed_tasks, methods=["GET"])

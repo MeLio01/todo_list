@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, Any
 from .model import Task as TaskDB
+from project.extensions import db
 
 # The class `Task` is a dataclass that provides a higher-level interface for working with tasks
 @dataclass
@@ -8,7 +9,6 @@ class Task:
     id: str
     content: str
     completed: bool
-    date_created: str
 
     # Class method that creates an instance of the `Task` class from a `TaskDB` object
     @classmethod
@@ -17,7 +17,6 @@ class Task:
             id = task_db.id,
             content = task_db.content,
             completed = task_db.completed,
-            date_created = task_db.date_created
         )
     
     # Class method that adds a new task to the database
@@ -46,7 +45,7 @@ class Task:
     def delete_task(cls, taskinfo: Dict[str, Any]):
         task_db: TaskDB = TaskDB.get_first({"id": taskinfo["id"]})
         if task_db:
-            task_db.delete()
+            task_db.delete(force_delete=True)
             return True
         return False
 
@@ -80,14 +79,6 @@ class Task:
     @classmethod
     def get_completed_tasks(cls):
         tasks = TaskDB.get_all({"completed": True})
-        if tasks:
-            return [cls.instance_creator(task) for task in tasks]
-        return None
-    
-    # Class method that returns the instance of all the tasks created on a specific date
-    @classmethod
-    def get_tasks_by_date_created(cls, taskinfo: Dict[str, Any]):
-        tasks = TaskDB.get_all({"date_created": taskinfo["date_created"]})
         if tasks:
             return [cls.instance_creator(task) for task in tasks]
         return None
