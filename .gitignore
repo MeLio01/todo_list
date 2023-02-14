@@ -3,4 +3,4 @@ poetry.lock
 .env
 __pycache__
 /migrations/*
-app.db
+/config/app.db
