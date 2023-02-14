@@ -10,10 +10,18 @@ Python 3.11.2
 
     pip3 install poetry
       
+> Jump to project directiory
+
+    cd todo_list
+    
 > Activate poetry shell
 
     poetry shell
       
+> Install the dependencies
+
+    poetry install
+
 > Run the application
 
     python3 manage.py
