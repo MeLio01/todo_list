@@ -2,5 +2,5 @@
 poetry.lock
 .env
 __pycache__
-/migrations/*
-/config/app.db
+migrations/*
+config/app.db
