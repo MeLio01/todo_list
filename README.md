@@ -13,7 +13,7 @@ Python 3.11.2
 > Jump to project directiory
 
     cd todo_list
-    
+
 > Activate poetry shell
 
     poetry shell
@@ -21,6 +21,12 @@ Python 3.11.2
 > Install the dependencies
 
     poetry install
+
+> Initialize SqlAlchemy Database
+
+    flask db init
+    flask db migrate
+    flask db upgrade
 
 > Run the application
 
