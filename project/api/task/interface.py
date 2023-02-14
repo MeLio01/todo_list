@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import Dict, Any
-
 from .model import Task as TaskDB
 
+# The class `Task` is a dataclass that provides a higher-level interface for working with tasks
 @dataclass
 class Task:
     id: str
@@ -10,6 +10,7 @@ class Task:
     completed: bool
     date_created: str
 
+    # Class method that creates an instance of the `Task` class from a `TaskDB` object
     @classmethod
     def instance_creator(cls, task_db: TaskDB):
         return cls(
@@ -19,6 +20,7 @@ class Task:
             date_created = task_db.date_created
         )
     
+    # Class method that adds a new task to the database
     @classmethod
     def add_task(cls, taskinfo: Dict[str, Any]):
         task_db = TaskDB(
@@ -30,6 +32,7 @@ class Task:
             return cls.instance_creator(task_db)
         return None
     
+    # Class method that updates an existing task in the database
     @classmethod
     def update_task(cls, taskinfo: Dict[str, Any]):
         task_db: TaskDB = TaskDB.get_first({"id": taskinfo["id"]})
@@ -38,6 +41,7 @@ class Task:
             return cls.instance_creator(task_db)
         return None
     
+    # Class method that deletes a task from the database
     @classmethod
     def delete_task(cls, taskinfo: Dict[str, Any]):
         task_db: TaskDB = TaskDB.get_first({"id": taskinfo["id"]})
@@ -45,7 +49,18 @@ class Task:
             task_db.delete()
             return True
         return False
+
+    # Class method that updates the completion status of a task in the database
+    @classmethod
+    def update_task_status(cls, taskinfo: Dict[str, Any]):
+        task_db: TaskDB = TaskDB.get_first({"id": taskinfo["id"]})
+        if task_db:
+            task_db.completed = not task_db.completed
+            task_db.update()
+            return cls.instance_creator(task_db)
+        return None
     
+    # Class method that returns the instance of task by the given id
     @classmethod
     def get_task_by_id(cls, taskinfo: Dict[str, Any]):
         task_db: TaskDB = TaskDB.get_first({"id": taskinfo["id"]})
@@ -53,6 +68,7 @@ class Task:
             return cls.instance_creator(task_db)
         return None
     
+    # Class method that returns the instance of all the tasks
     @classmethod
     def get_all_tasks(cls):
         tasks = TaskDB.get_all()
@@ -60,20 +76,15 @@ class Task:
             return [cls.instance_creator(task) for task in tasks]
         return None
     
+    # Class method that returns the instance of all the completed tasks
     @classmethod
-    def get_completed_tasks(cls, taskinfo: Dict[str, Any]):
-        tasks = TaskDB.get_all({"completed": taskinfo["completed"]})
+    def get_completed_tasks(cls):
+        tasks = TaskDB.get_all({"completed": True})
         if tasks:
             return [cls.instance_creator(task) for task in tasks]
         return None
     
-    @classmethod
-    def get_tasks_by_content(cls, taskinfo: Dict[str, Any]):
-        tasks = TaskDB.get_all({"content": taskinfo["content"]})
-        if tasks:
-            return [cls.instance_creator(task) for task in tasks]
-        return None
-    
+    # Class method that returns the instance of all the tasks created on a specific date
     @classmethod
     def get_tasks_by_date_created(cls, taskinfo: Dict[str, Any]):
         tasks = TaskDB.get_all({"date_created": taskinfo["date_created"]})

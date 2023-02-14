@@ -9,12 +9,12 @@ class TaskIdSchema(Schema):
     content = fields.String()
 
 class TaskDateSchema(Schema):
-    date_created = fields.DateTime(required=True)
+    date_created = fields.String(required=True)
 
-class TaskOUtSchema(TaskIdSchema, TaskSchema):
+class TaskOutSchema(TaskIdSchema, TaskSchema):
     date_created = fields.String(required=True)
 
 task_schema = TaskSchema()
-task_out_schema = TaskOUtSchema()
+task_out_schema = TaskOutSchema()
 task_id_schema  = TaskIdSchema()
 task_date_schema = TaskDateSchema()
