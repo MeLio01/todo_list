@@ -14,12 +14,9 @@ Python 3.11.2
 
     cd todo_list
 
-> Activate poetry shell
+> Activate poetry shell and install dependencies
 
     poetry shell
-      
-> Install the dependencies
-
     poetry install
 
 > Initialize SqlAlchemy Database
