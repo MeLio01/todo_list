@@ -1,6 +1,4 @@
-.flaskenv
-.env
-__pycache__/
 migrations
 config/app.db
+__pycache__/
 venv

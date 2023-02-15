@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: todo
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+    command: ["bash", "start_app.sh"]

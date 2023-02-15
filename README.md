@@ -1,6 +1,6 @@
 # TODO list backend application in Python-Flask 
 Python 3.11.2
-## Steps to run the application
+## Steps to run the application locally
 
 > Clone the repository
 
@@ -14,10 +14,11 @@ Python 3.11.2
 
     cd todo_list
 
-> Activate poetry shell and install dependencies
+> Activate the virtual environment and install dependencies
 
-    poetry shell
-    poetry install
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
 
 > Initialize SqlAlchemy Database
 
@@ -28,3 +29,13 @@ Python 3.11.2
 > Run the application
 
     python3 manage.py
+
+----------------------------------------------------------
+
+## Steps to run the docker container
+
+> Install Docker in your system
+
+> Run the docker container 
+
+    docker-compose up
