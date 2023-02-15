@@ -6,11 +6,8 @@ Python 3.11.2
 
     git clone https://github.com/MeLio01/todo_list.git
 
-> Install Poetry
-
-    pip3 install poetry
       
-> Jump to project directiory
+> Jump to project directory
 
     cd todo_list
 
@@ -28,11 +25,11 @@ Python 3.11.2
 
 > Run the application
 
-    python3 manage.py
+    flask run
 
 ----------------------------------------------------------
 
-## Steps to run the docker container
+## Steps to run the Docker Container
 
 > Install Docker in your system
 
